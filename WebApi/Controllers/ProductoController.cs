@@ -1,7 +1,9 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Hecho por Fernando Calderon
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace WebApi.Controllers
@@ -16,15 +18,16 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetProducto()
+        public async Task<IHttpActionResult> GetProducto()
         {
-            List<Producto> producto = _productoService.GetAll();
+            List<Producto> producto = await _productoService.GetAll();
 
             return Ok(producto);
         }
 
+
         [HttpPost]
-        public IHttpActionResult PostProducto(Producto nuevoProducto)  
+        public IHttpActionResult PostProducto(Producto nuevoProducto)
         {
             Producto newProducto = _productoService.CreateProducto(nuevoProducto);
 
@@ -37,7 +40,7 @@ namespace WebApi.Controllers
         {
             _productoService.DeleteProducto(Id);
 
-            return Ok("El producto ha sido eliminado");
+            return Ok("Producto eliminado");
         }
 
         [HttpPut]
@@ -45,7 +48,7 @@ namespace WebApi.Controllers
         {
             _productoService.UpdateProducto(Id, nuevosRegistros);
 
-            return Ok("El producto ha sido modificado");
+            return Ok("Producto modificado");
         }
 
     }

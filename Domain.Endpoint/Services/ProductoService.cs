@@ -1,8 +1,10 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Hecho por Fernando Calderon
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Repositories;
 using System.Collections.Generic;
 using System;
 using Domain.Endpoint.Interfaces.Services;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Services
 {
@@ -15,11 +17,6 @@ namespace Domain.Endpoint.Services
             _productoRepository = ProductoRepository;
         }
 
-        public void Create(Producto nuevoProducto)
-        {
-            throw new NotImplementedException();
-        }
-
         public Producto CreateProducto(Producto nuevoProducto)
         {
             Producto newProducto = new Producto()
@@ -27,42 +24,31 @@ namespace Domain.Endpoint.Services
                 Id = Guid.NewGuid(),
                 NombreProducto = nuevoProducto.NombreProducto,
                 Descripcion = nuevoProducto.Descripcion,
-                Preciocompra= nuevoProducto.Preciocompra,
+                IdCategoria = nuevoProducto.IdCategoria,
+                Preciocompra = nuevoProducto.Preciocompra,
                 Precioventa = nuevoProducto.Precioventa,
-                Estado= nuevoProducto.Estado,
-                
-
+                Estado = nuevoProducto.Estado,
+                FechaCompra = nuevoProducto.FechaCompra,
+                FechaVencimiento = nuevoProducto.FechaVencimiento
             };
-
-            _productoRepository.Create(newProducto);
+            _productoRepository.CreateProducto(newProducto);
             return newProducto;
         }
 
-      
-
-        public void Delete(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteProducto(Guid Id)
         {
-            _productoRepository.Delete(Id);
+            _productoRepository.DeleteProducto(Id);
         }
 
-        public List<Producto> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Producto> GetAll()
+        public Task<List<Producto>> GetAll()
         {
             return _productoRepository.Get();
         }
 
-        public void UpdateProducto(Guid Id, Producto nuevosRegistros)
+        public void UpdateProducto(Guid Id, Producto nuevoRegistros)
         {
-            _productoRepository.UpdateProducto(Id, nuevosRegistros);
-        }  
+            _productoRepository.UpdateProducto(Id, nuevoRegistros);
+        }
     }
 }

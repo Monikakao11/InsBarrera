@@ -1,18 +1,20 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Hecho por Fernando Calderon
+using Domain.Endpoint.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Interfaces.Repositories
 {
     public interface IProductoRepository
     {
-        List<Producto> Get();
+        Task<List<Producto>> Get();
 
-        void Create(Producto nuevoProducto);
 
-        void Delete(Guid Id);
+        void CreateProducto(Producto nuevoProducto);
+
+        void DeleteProducto(Guid Id);
 
         void UpdateProducto(Guid Id, Producto nuevosRegistros);
-       
     }
 }
