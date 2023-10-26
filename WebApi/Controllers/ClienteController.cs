@@ -1,7 +1,10 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Controlador de el catálogo Cliente,
+//elaborado por: Mónica Gutiérrez Álvarez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace WebApi.Controllers
@@ -16,15 +19,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetCliente()
+        public async Task<IHttpActionResult> GetCliente()
         {
-            List<Cliente> cliente = _clienteService.GetAll();
+            List<Cliente> cliente = await _clienteService.GetAll();
 
             return Ok(cliente);
         }
 
         [HttpPost]
-        public IHttpActionResult PostCliente(Cliente nuevoCliente)  
+        public IHttpActionResult PostCliente(Cliente nuevoCliente)
         {
             Cliente newCliente = _clienteService.CreateCliente(nuevoCliente);
 
@@ -37,15 +40,15 @@ namespace WebApi.Controllers
         {
             _clienteService.DeleteCliente(Id);
 
-            return Ok("Estiamdo el Cliente ha sido eliminado");
+            return Ok("El cliente seleccionado ha sido eliminado");
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateCliente(Guid Id, Cliente nuevosCampos)
+        public IHttpActionResult UpdateCliente(Guid Id, Cliente nuevosRegistros)
         {
-            _clienteService.UpdateCliente(Id, nuevosCampos);
+            _clienteService.UpdateCliente(Id, nuevosRegistros);
 
-            return Ok("Estimado el Cliente ha sido modificado");
+            return Ok("El cliente seleccinado ha sido modificado");
         }
 
     }

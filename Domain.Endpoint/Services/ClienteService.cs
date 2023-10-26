@@ -1,8 +1,11 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Servicio del catálogo Cliente, 
+//elaborado por Mónica Gutiérrez Álvarez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Repositories;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Services
 {
@@ -15,6 +18,7 @@ namespace Domain.Endpoint.Services
             _clienteRepository = ClienteRepository;
         }
 
+
         public Cliente CreateCliente(Cliente nuevoCliente)
         {
             Cliente newCliente = new Cliente()
@@ -23,29 +27,35 @@ namespace Domain.Endpoint.Services
                 PrimerNombre = nuevoCliente.PrimerNombre,
                 SegundoNombre = nuevoCliente.SegundoNombre,
                 PrimerApellido = nuevoCliente.PrimerApellido,
-              SegundoApellido= nuevoCliente.SegundoApellido
-                
+                SegundoApellido = nuevoCliente.SegundoApellido,
+                Correo = nuevoCliente.Correo,
+                Telefono = nuevoCliente.Telefono,
+                Estado = nuevoCliente.Estado,
+                FechaCreacion = nuevoCliente.FechaCreacion
+
             };
 
-            _clienteRepository.Create(newCliente);
+            _clienteRepository.CreateCliente(newCliente);
             return newCliente;
         }
 
-       
+
 
         public void DeleteCliente(Guid Id)
         {
-            _clienteRepository.Delete(Id);
+            _clienteRepository.DeleteCliente(Id);
         }
 
-        public List<Cliente> GetAll()
+
+
+        public Task<List<Cliente>> GetAll()
         {
             return _clienteRepository.Get();
         }
 
-        public void UpdateCliente(Guid Id, Cliente nuevosCampos)
+        public void UpdateCliente(Guid Id, Cliente nuevosRegistros)
         {
-            _clienteRepository.UpdateCliente(Id, nuevosCampos);  
+            _clienteRepository.UpdateCliente(Id, nuevosRegistros);
         }
 
     }

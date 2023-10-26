@@ -3,8 +3,10 @@
     "",
     "\\Infrastructure.Endpoint",
     "\\Infrastructure.Endpoint\\Data",
-    "\\Infrastructure.Endpoint\\Data\\Repositories"
+    "\\Infrastructure.Endpoint\\Data\\Repositories",
+    "\\WebApi",
+    "\\WebApi\\Controllers"
   ],
-  "SelectedNode": "\\InsumosAPI.sln",
+  "SelectedNode": "\\WebApi\\Controllers\\CatProductoController.cs",
   "PreviewInSolutionExplorer": false
 }
