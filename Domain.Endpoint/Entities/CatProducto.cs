@@ -1,6 +1,6 @@
 ﻿namespace Domain.Endpoint.Entities
 {
-      public class CatProducto : BaseEntity
+  public class CatProducto : BaseEntity
     {
         public string Descripcion { get; set; }
         public int Estado { get; set; }
