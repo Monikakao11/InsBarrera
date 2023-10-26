@@ -1,12 +1,17 @@
-﻿namespace Domain.Endpoint.Entities
+﻿//hecho por Cesar Rodriguez
+using System;
+
+namespace Domain.Endpoint.Entities
 {
-    public class Proveedor:BaseEntity
+
+    public class Proveedor : BaseEntity
     {
         public string NombreCompañia { get; set; }
-
-        public int Telefono { get; set; }
         public string Correo { get; set; }
+        public int Telefono { get; set; }
+        public int Estado { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-       
+
     }
 }

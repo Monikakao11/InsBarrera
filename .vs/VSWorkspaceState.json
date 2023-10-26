@@ -7,6 +7,6 @@
     "\\WebApi",
     "\\WebApi\\Controllers"
   ],
-  "SelectedNode": "\\WebApi\\Controllers\\CatProductoController.cs",
+  "SelectedNode": "\\Infrastructure.Endpoint\\Data\\Repositories\\ProductoRepository.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,7 +1,9 @@
-﻿using Domain.Endpoint.Entities;
+﻿//hecho por Cesar Rodriguez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace WebApi.Controllers
@@ -16,37 +18,35 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetProveedor()
+        public async Task<IHttpActionResult> GetProveedor()
         {
-            List<Proveedor> proveedor = _proveedorService.GetAll();
+            List<Proveedor> proveedor = await _proveedorService.GetAll();
 
             return Ok(proveedor);
         }
 
         [HttpPost]
-        public IHttpActionResult PostProveedor(Proveedor nuevoProveedor)  
+        public IHttpActionResult PostProveedor(Proveedor nuevoProveedor)
         {
             Proveedor newProveedor = _proveedorService.CreateProveedor(nuevoProveedor);
 
             return Ok(newProveedor);
         }
 
-
         [HttpDelete]
-        public IHttpActionResult DeleteProveedor(Guid Id)
+        public IHttpActionResult DeleteCatProveedor(Guid Id)
         {
             _proveedorService.DeleteProveedor(Id);
 
-            return Ok("el Proveedor ha sido eliminado");
+            return Ok("El producto seleccionado ha sido eliminado");
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateProveedor(Guid Id, Proveedor nuevosCampos)
+        public IHttpActionResult UpdateProveedor(Guid Id, Proveedor nuevosRegistros)
         {
-            _proveedorService.UpdateProveedor(Id, nuevosCampos);
+            _proveedorService.UpdateProveedor(Id, nuevosRegistros);
 
-            return Ok("el proveedor ha sido modificado");
+            return Ok("El Producto seleccinado ha sido modificado");
         }
-
     }
 }

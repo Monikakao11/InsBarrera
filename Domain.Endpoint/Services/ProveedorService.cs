@@ -1,8 +1,10 @@
-﻿using Domain.Endpoint.Entities;
+﻿//hecho por Cesar Rodriguez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Repositories;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Services
 {
@@ -23,29 +25,28 @@ namespace Domain.Endpoint.Services
                 NombreCompañia = nuevoProveedor.NombreCompañia,
                 Correo = nuevoProveedor.Correo,
                 Telefono = nuevoProveedor.Telefono,
-              
-                
+                Estado = nuevoProveedor.Estado,
+                FechaCreacion = nuevoProveedor.FechaCreacion
             };
 
-            _proveedorRepository.Create(newProveedor);
+            _proveedorRepository.CreateProveedor(newProveedor);
             return newProveedor;
         }
 
-       
-
         public void DeleteProveedor(Guid Id)
         {
-            _proveedorRepository.Delete(Id);
+            _proveedorRepository.DeleteProveedor(Id);
         }
 
-        public List<Proveedor> GetAll()
+        public Task<List<Proveedor>> GetAll()
         {
             return _proveedorRepository.Get();
         }
 
-        public void UpdateProveedor(Guid Id, Proveedor nuevosCampos)
+        public void UpdateProveedor(Guid Id, Proveedor nuevoRegistros)
         {
-            _proveedorRepository.UpdateProveedor(Id, nuevosCampos);
+            _proveedorRepository.UpdateProveedor(Id, nuevoRegistros);
         }
     }
 }
+
