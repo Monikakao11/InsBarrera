@@ -3,61 +3,156 @@ using System.Collections.Generic;
 using System;
 using Domain.Endpoint.Interfaces.Repositories;
 using System.Linq;
-
+///Trabajado por Diego Baltodano Octubre 2023 :D
 namespace Infrastructure.Endpoint.Data.Repositories
 {
-    public class CatProductoRepository : ICatProductoRepository 
+    public class CatProductoRepository : ICatProductoRepository
     {
-        private readonly List<CatProducto> dataCatProducto = new List<CatProducto>();
+        private readonly ISqlDbConnection _sqlDbConnection;
 
-        public CatProductoRepository()
+        public CatProductoRepository(ISqlDbConnection sqlDbConnection)
         {
-            var CatProducto1 = new CatProducto
+            _sqlDbConnection = sqlDbConnection;
+
+        }
+
+        public void CreateCatProducto(CatProducto nuevoCatProducto)
+        {
+            
+
+            const string sqlQuery = "INSERT INTO TblCategoria (IdCategoria, Descripcion, Estado, FechaCreacion) Values (@IdCategoria, @Descripcion, @Estado, @FechaCreacion)";
+            SqlCommand cmd = _sqlDbConnection.TraerConsulta(sqlQuery);
+            SqlParameter[] parameters = new SqlParameter[]
             {
-                Id = Guid.NewGuid(),
-                Descripcion = "Barra de chocolate",
-                Estado = "10 unidades de 20cm",
-                Precio = 120 ,
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    //_Valor del parametro
+                    ParameterName ="@IdCategoria",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = nuevoCatProducto.Id
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@Descripcion",
+
+                    SqlDbType =SqlDbType.NVarChar,
+                    Value = nuevoCatProducto.Descripcion
+
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@Estado",
+
+                    SqlDbType =SqlDbType.Int,
+                    Value = nuevoCatProducto.Estado
+
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@FechaCreacion",
+
+                    SqlDbType =SqlDbType.DateTime,
+                    Value = nuevoCatProducto.FechaCreacion
+                }
 
             };
 
-            dataCatProducto.Add(CatProducto1);
+            cmd.Parameters.AddRange(parameters);
+            cmd.ExecuteNonQuery();
+
+
         }
 
-        public void Create(CatProducto nuevoCatProducto)
+        public void DeleteCatProducto(Guid Id)
         {
-            dataCatProducto.Add(nuevoCatProducto);
-        }
-
-
-
-        public void Delete(Guid Id)
-        {
-            var CatProductoDelete = dataCatProducto.FirstOrDefault(e => e.Id == Id);
-
-            if (CatProductoDelete != null)
+            //Aqui haces una consulta donde comparas los ID
+            string delec = "DELETE FROM TblCategoria WHERE IdCategoria = @IdCategoria";
+            SqlCommand sqlCommand = _sqlDbConnection.TraerConsulta(delec);
+            SqlParameter parameter = new SqlParameter()
             {
-                dataCatProducto.Remove(CatProductoDelete);
-            }
+                Direction = ParameterDirection.Input,
+                ParameterName = "@IdCategoria",
+                SqlDbType = SqlDbType.UniqueIdentifier,
+                Value = Id
+            };
+            sqlCommand.Parameters.Add(parameter);
+            sqlCommand.ExecuteNonQuery();
         }
 
-        public List<CatProducto> Get()
+
+        public async Task<List<CatProducto>> Get()
         {
-            return dataCatProducto;
+            string query = "SELECT * FROM TblCategoria;";
+            DataTable dataTable = await _sqlDbConnection.ExecuteQueryCommandAsync(query);
+            List<CatProducto> Catp = dataTable.AsEnumerable().Select(MapEntityFromDataRow).ToList();
+
+            return Catp;
         }
 
-        public void UpdateCatProducto(Guid Id, CatProducto nuevosRegistros)
+        private CatProducto MapEntityFromDataRow(DataRow row)
         {
-          var UpdateCatProducto = dataCatProducto.FirstOrDefault(e => e.Id == Id);
-
-         if (UpdateCatProducto != null)
-         {
-              UpdateCatProducto.Descripcion = nuevosRegistros.Descripcion;
-              UpdateCatProducto.Estado = nuevosRegistros.Estado;
-              UpdateCatProducto.Precio = nuevosRegistros.Precio;
-
-         }
+            return new CatProducto()
+            {
+                Id = _sqlDbConnection.GetDataRowValue<Guid>(row, "IdCategoria"),
+                Descripcion = _sqlDbConnection.GetDataRowValue<string>(row, "Descripcion"),
+                Estado = _sqlDbConnection.GetDataRowValue<int>(row, "Estado"),
+                FechaCreacion = _sqlDbConnection.GetDataRowValue<DateTime>(row, "FechaCreacion"),
+            };
         }
+
+        public void UpdateCatProducto(Guid Id, CatProducto nuevoCatProducto)
+        {
+            const string sqlQuery = "UPDATE TblCategoria SET  Descripcion = @Descripcion, Estado = @Estado,FechaCreacion = @FechaCreacion WHERE IdCategoria = @IdCategoria";
+            SqlCommand cmd = _sqlDbConnection.TraerConsulta(sqlQuery);
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    //_Valor del parametro
+                    ParameterName ="@IdCategoria",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = nuevoCatProducto.Id
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@Descripcion",
+
+                    SqlDbType =SqlDbType.NVarChar,
+                    Value = nuevoCatProducto.Descripcion
+
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@Estado",
+
+                    SqlDbType =SqlDbType.Int,
+                    Value = nuevoCatProducto.Estado
+
+                },
+                new SqlParameter()
+                {
+                    Direction = ParameterDirection.Input,
+                    ParameterName ="@FechaCreacion",
+
+                    SqlDbType =SqlDbType.DateTime,
+                    Value = nuevoCatProducto.FechaCreacion
+                }
+
+            };
+
+            cmd.Parameters.AddRange(parameters);
+            cmd.ExecuteNonQuery();
+
+        }
+
+
     }
 }
 
