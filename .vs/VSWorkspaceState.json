@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Infrastructure.Endpoint",
+    "\\Infrastructure.Endpoint\\Data",
+    "\\Infrastructure.Endpoint\\Data\\Repositories"
+  ],
+  "SelectedNode": "\\Infrastructure.Endpoint\\Data\\Repositories\\UserRepository.cs",
+  "PreviewInSolutionExplorer": false
+}

@@ -43,7 +43,7 @@ namespace WebApi
             );
 
             services.AddScoped<IProveedorService, ProveedorService>();
-            services.AddScoped<IColaboradorService, ColaboradorService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<ICatProductoService, CatProductoService>();
             services.AddScoped<IProductoService, ProductoService>();

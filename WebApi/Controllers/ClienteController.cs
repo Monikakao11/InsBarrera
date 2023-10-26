@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         {
             _clienteService.DeleteCliente(Id);
 
-            return Ok("Estiamdo Cliente ha sido eliminado");
+            return Ok("Estiamdo el Cliente ha sido eliminado");
         }
 
         [HttpPut]

@@ -10,7 +10,7 @@ namespace Infrastructure.Endpoint.Extensions
         {
 
             services.AddSingleton<IProveedorRepository, ProveedorRepository>();
-            services.AddSingleton<IColaboradorRepository, ColaboradorRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IClienteRepository, ClienteRepository>();
             services.AddSingleton<ICatProductoRepository, CatProductoRepository>();
             services.AddSingleton<IProductoRepository, ProductoRepository>();

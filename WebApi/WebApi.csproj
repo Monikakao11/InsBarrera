@@ -119,7 +119,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\CatProductoController.cs" />
-    <Compile Include="Controllers\ColaboradorController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Global.asax.cs">
