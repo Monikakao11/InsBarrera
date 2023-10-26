@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System;
 using Domain.Endpoint.Interfaces.Repositories;
 using System.Linq;
-///Trabajado por Diego Baltodano Octubre 2023 :D
+using System.Threading.Tasks;
+using System.Data;
+using System.Data.SqlClient;
+///trabajado por Diego Baltodano
 namespace Infrastructure.Endpoint.Data.Repositories
 {
-   public class CatProductoRepository : ICatProductoRepository
+    public class CatProductoRepository : ICatProductoRepository
     {
         private readonly ISqlDbConnection _sqlDbConnection;
 
@@ -18,7 +21,7 @@ namespace Infrastructure.Endpoint.Data.Repositories
 
         public void CreateCatProducto(CatProducto nuevoCatProducto)
         {
-            
+
 
             const string sqlQuery = "INSERT INTO TblCategoria (IdCategoria, Descripcion, Estado, FechaCreacion) Values (@IdCategoria, @Descripcion, @Estado, @FechaCreacion)";
             SqlCommand cmd = _sqlDbConnection.TraerConsulta(sqlQuery);
@@ -151,5 +154,8 @@ namespace Infrastructure.Endpoint.Data.Repositories
             cmd.ExecuteNonQuery();
 
         }
+
+
+    }
 }
 

@@ -1,10 +1,11 @@
 ﻿using Domain.Endpoint.Entities;
 using System;
 using System.Collections.Generic;
-///Trabajado por Diego Baltodano Octubre 2023  :D 
+using System.Threading.Tasks;
+////trabajado por Diego Baltodano
 namespace Domain.Endpoint.Interfaces.Services
 {
-     public interface ICatProductoService
+    public interface ICatProductoService
     {
         Task<List<CatProducto>> GetAll();
 

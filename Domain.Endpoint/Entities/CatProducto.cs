@@ -11,4 +11,4 @@ namespace Domain.Endpoint.Entities
 
     }
 }
-///Trabajado por Diego Baltodano Octubre 2023 :D
+///Trabajado por Diego Baltodano 

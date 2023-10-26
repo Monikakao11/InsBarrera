@@ -2,8 +2,10 @@
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
-///Realizado Por Diego Baltodano :D Octubre 2023
+
+///trabajado por Diego Baltodano
 namespace WebApi.Controllers
 {
     public class CatProductoController : ApiController
@@ -18,13 +20,13 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetCatProducto()
         {
-            List<CatProducto> catproducto =await _catproductoService.GetAll();
+            List<CatProducto> catproducto = await _catproductoService.GetAll();
 
             return Ok(catproducto);
         }
 
         [HttpPost]
-        public IHttpActionResult PostCatProducto(CatProducto nuevoCatProducto)  
+        public IHttpActionResult PostCatProducto(CatProducto nuevoCatProducto)
         {
             CatProducto newCatProducto = _catproductoService.CreateCatProducto(nuevoCatProducto);
 
@@ -45,8 +47,8 @@ namespace WebApi.Controllers
         {
             _catproductoService.UpdateCatProducto(Id, nuevosRegistros);
 
-            return Ok("La Categoria seleccinada ha sido modificada");
+            return Ok("La Categoria seleccionada ha sido modificada");
         }
-       
+
     }
 }

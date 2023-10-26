@@ -3,10 +3,11 @@ using Domain.Endpoint.Interfaces.Repositories;
 using System.Collections.Generic;
 using System;
 using Domain.Endpoint.Interfaces.Services;
-///Trabajado por Diego Baltodano Octubre 2023 :D
+using System.Threading.Tasks;
+///Trabajado por Diego Baltodano
 namespace Domain.Endpoint.Services
 {
-public class CatProductoService : ICatProductoService
+    public class CatProductoService : ICatProductoService
     {
         private readonly ICatProductoRepository _catproductoRepository;
 

@@ -1,19 +1,20 @@
 ﻿using Domain.Endpoint.Entities;
 using System;
 using System.Collections.Generic;
-///Trabajado por Diego Baltodano Octubre 2023 :D
+using System.Threading.Tasks;
+////trabajado por Diego Baltodano
 namespace Domain.Endpoint.Interfaces.Repositories
 {
-   public interface ICatProductoRepository
+    public interface ICatProductoRepository
     {
         Task<List<CatProducto>> Get();
 
 
-       void CreateCatProducto(CatProducto nuevoCatProducto);
-        
+        void CreateCatProducto(CatProducto nuevoCatProducto);
+
         void DeleteCatProducto(Guid Id);
 
-      void UpdateCatProducto(Guid Id, CatProducto nuevosRegistros);
-       
+        void UpdateCatProducto(Guid Id, CatProducto nuevosRegistros);
+
     }
 }
