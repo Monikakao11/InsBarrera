@@ -1,16 +1,21 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Realizado por Joshua Cahvez
+using Domain.Endpoint.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Interfaces.Repositories
 {
     public interface IUserRepository
     {
-        List<User> Get();
-        void Create(User nuevoColaborador);
+        Task<List<User>> Get();
 
-        void Delete(Guid Id);
 
-        void UpdateColaborador(Guid Id, User nuevosregistros);
+        void CreateUser(User nuevoUser);
+
+        void DeleteUser(Guid Id);
+
+        void UpdateUser(Guid Id, User nuevosRegistros);
+
     }
 }

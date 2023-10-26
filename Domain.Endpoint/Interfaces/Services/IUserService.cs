@@ -1,18 +1,19 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Realizado por Joshua Chavez
+using Domain.Endpoint.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Interfaces.Services
 {
     public interface IUserService
     {
-        List<User> GetAll();
+        Task<List<User>> GetAll();
 
-        User CreateColaborador(User nuevoColaborador);
+        User CreateUser(User nuevoCatUser);
 
-        void DeleteColaborador(Guid Id);
+        void DeleteUser(Guid Id);
 
-        void UpdateColaborador(Guid Id, User nuevosRegistros);
-
+        void UpdateUser(Guid Id, User nuevoRegistros);
     }
 }

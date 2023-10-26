@@ -1,51 +1,52 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Realizado por Joshua Chavez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace WebApi.Controllers
 {
     public class UserController : ApiController
     {
-        private readonly IUserService _colaboradorService;
+        private readonly IUserService _userService;
 
-        public UserController(IUserService colaboradorService)
+        public UserController(IUserService userService)
         {
-            _colaboradorService = colaboradorService;
+            _userService = userService;
         }
 
         [HttpGet]
-        public IHttpActionResult GetColaborador()
+        public async Task<IHttpActionResult> GetUser()
         {
-            List<User> colabolador = _colaboradorService.GetAll();
+            List<User> user = await _userService.GetAll();
 
-            return Ok(colabolador);
+            return Ok(user);
         }
 
         [HttpPost]
-        public IHttpActionResult PostColaborador(User nuevoColaborador)
+        public IHttpActionResult PostUser(User nuevoUser)
         {
-            User newColaborador = _colaboradorService.CreateColaborador(nuevoColaborador);
+            User newUser = _userService.CreateUser(nuevoUser);
 
-            return Ok(newColaborador);
+            return Ok(newUser);
         }
 
-
         [HttpDelete]
-        public IHttpActionResult DeleteColaborador(Guid Id)
+        public IHttpActionResult DeleteUser(Guid Id)
         {
-            _colaboradorService.DeleteColaborador(Id);
+            _userService.DeleteUser(Id);
 
-            return Ok("el empleado ha sido eliminado");
+            return Ok("El Usuario seleccionado ha sido eliminado");
         }
 
         [HttpPut]
-        public IHttpActionResult UpdaColaborador(Guid Id, User nuevosRegistros)
+        public IHttpActionResult UpdateUser(Guid Id, User nuevosRegistros)
         {
-            _colaboradorService.UpdateColaborador(Id, nuevosRegistros);
+            _userService.UpdateUser(Id, nuevosRegistros);
 
-            return Ok("el empleado ha sido modificado");
+            return Ok("El Usuario seleccinado ha sido modificado");
         }
 
     }

@@ -1,54 +1,59 @@
-﻿using Domain.Endpoint.Entities;
+﻿//Realizado por Joshua Chavez
+using Domain.Endpoint.Entities;
 using Domain.Endpoint.Interfaces.Repositories;
 using Domain.Endpoint.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Domain.Endpoint.Services
 {
     public class UserService : IUserService
     {
+        private readonly IUserRepository _userRepository;
 
-        private readonly IUserRepository _colaboradorRepository;
 
-        public UserService(IUserRepository colaboradorRepository)
+        public UserService(IUserRepository userRepository)
         {
-            _colaboradorRepository = colaboradorRepository;
+            _userRepository = userRepository;
         }
 
-
-        public User CreateColaborador(User nuevoColaborador)
+        public User CreateUser(User nuevoUser)
         {
-            User newColaborador = new User()
+            User newUser = new User()
             {
                 Id = Guid.NewGuid(),
-                PrimerNombre = nuevoColaborador.PrimerNombre,
-                SegundoNombre = nuevoColaborador.SegundoNombre,
-                PrimerApellido = nuevoColaborador.PrimerApellido,
-                SegundoApellido = nuevoColaborador.SegundoApellido,
-                Correo = nuevoColaborador.Correo,
-                Estado = nuevoColaborador.Estado,
-                Sexo = nuevoColaborador.Sexo,
-                UserName = nuevoColaborador.UserName,
-                Contraseña = nuevoColaborador.Contraseña,
+                PrimerNombre = nuevoUser.PrimerNombre,
+                SegundoNombre = nuevoUser.SegundoNombre,
+                PrimerApellido = nuevoUser.PrimerApellido,
+                SegundoApellido = nuevoUser.SegundoApellido,
+                Correo = nuevoUser.Correo,
+                IdRol = nuevoUser.IdRol,
+                Estado = nuevoUser.Estado,
+                Sexo = nuevoUser.Sexo,
+                UserName = nuevoUser.UserName,
+                Contraseña = nuevoUser.Contraseña,
+                FechaCreacion = nuevoUser.FechaCreacion
+
             };
-            _colaboradorRepository.Create(newColaborador);
-            return newColaborador;
+
+            _userRepository.CreateUser(newUser);
+            return newUser;
         }
 
-        public void DeleteColaborador(Guid Id)
+        public void DeleteUser(Guid Id)
         {
-            _colaboradorRepository.Delete(Id);
+            _userRepository.DeleteUser(Id);
         }
 
-        public List<User> GetAll()
+        public Task<List<User>> GetAll()
         {
-            return _colaboradorRepository.Get();
+            return _userRepository.Get();
         }
 
-        public void UpdateColaborador(Guid Id, User nuevosRegistros)
+        public void UpdateUser(Guid Id, User nuevoRegistros)
         {
-            _colaboradorRepository.UpdateColaborador(Id, nuevosRegistros);
+            _userRepository.UpdateUser(Id, nuevoRegistros);
         }
     }
 }
