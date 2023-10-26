@@ -6,7 +6,7 @@ using System.Linq;
 ///Trabajado por Diego Baltodano Octubre 2023 :D
 namespace Infrastructure.Endpoint.Data.Repositories
 {
-    public class CatProductoRepository : ICatProductoRepository
+   public class CatProductoRepository : ICatProductoRepository
     {
         private readonly ISqlDbConnection _sqlDbConnection;
 
@@ -151,8 +151,5 @@ namespace Infrastructure.Endpoint.Data.Repositories
             cmd.ExecuteNonQuery();
 
         }
-
-
-    }
 }
 
