@@ -3,10 +3,10 @@ using Domain.Endpoint.Interfaces.Repositories;
 using System.Collections.Generic;
 using System;
 using Domain.Endpoint.Interfaces.Services;
-
+///Trabajado por Diego Baltodano Octubre 2023 :D
 namespace Domain.Endpoint.Services
 {
-    public class CatProductoService : ICatProductoService
+public class CatProductoService : ICatProductoService
     {
         private readonly ICatProductoRepository _catproductoRepository;
 
@@ -14,12 +14,6 @@ namespace Domain.Endpoint.Services
         {
             _catproductoRepository = CatProductoRepository;
         }
-
-        public void Create(CatProducto nuevoCatProducto)
-        {
-            throw new NotImplementedException();
-        }
-
         public CatProducto CreateCatProducto(CatProducto nuevoCatProducto)
         {
             CatProducto newCatProducto = new CatProducto()
@@ -27,32 +21,24 @@ namespace Domain.Endpoint.Services
                 Id = Guid.NewGuid(),
                 Descripcion = nuevoCatProducto.Descripcion,
                 Estado = nuevoCatProducto.Estado,
-                Precio = nuevoCatProducto.Precio
+                FechaCreacion = nuevoCatProducto.FechaCreacion
 
             };
 
-            _catproductoRepository.Create(newCatProducto);
+            _catproductoRepository.CreateCatProducto(newCatProducto);
             return newCatProducto;
         }
 
-      
 
-        public void Delete(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void DeleteCatProducto(Guid Id)
         {
-            _catproductoRepository.Delete(Id);
+            _catproductoRepository.DeleteCatProducto(Id);
         }
 
-        public List<CatProducto> Get()
-        {
-            throw new NotImplementedException();
-        }
 
-        public List<CatProducto> GetAll()
+
+        public Task<List<CatProducto>> GetAll()
         {
             return _catproductoRepository.Get();
         }
@@ -60,6 +46,6 @@ namespace Domain.Endpoint.Services
         public void UpdateCatProducto(Guid Id, CatProducto nuevosRegistros)
         {
             _catproductoRepository.UpdateCatProducto(Id, nuevosRegistros);
-        }  
+        }
     }
 }
