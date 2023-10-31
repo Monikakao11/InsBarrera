@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         {
             _proveedorService.DeleteProveedor(Id);
 
-            return Ok("El producto seleccionado ha sido eliminado");
+            return Ok("El Proveedor seleccionado ha sido eliminado");
         }
 
         [HttpPut]
@@ -46,7 +46,7 @@ namespace WebApi.Controllers
         {
             _proveedorService.UpdateProveedor(Id, nuevosRegistros);
 
-            return Ok("El Producto seleccinado ha sido modificado");
+            return Ok("El Proveedor seleccinado ha sido modificado");
         }
     }
 }
