@@ -42,12 +42,7 @@ namespace WebApi
                     .Where(t => typeof(IHttpController).IsAssignableFrom(t) || t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase))
             );
 
-            services.AddScoped<IProveedorService, ProveedorService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IClienteService, ClienteService>();
-            services.AddScoped<ICatProductoService, CatProductoService>();
-            services.AddScoped<IProductoService, ProductoService>();
-            services.AddInfrastructureServices();
+            
         }
     }
 }
